@@ -1,0 +1,960 @@
+#+TITLE: Emacs
+#+PROPERTY: header-args :noweb yes :comments noweb
+
+* <<~/.doom.d/
+
+** <</init.el
+
+#+HEADER: :tangle (expand-file-name "init.el" (or (getenv "DOOMDIR") (or doom-private-dir "~/.doom.d")))
+#+begin_src elisp
+;;; init.el -*- lexical-binding: t; -*-
+
+
+;; This file controls what Doom modules are enabled and what order they load
+;; in. Remember to run 'doom sync' after modifying it!
+
+;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
+;;      documentation. There you'll find a "Module Index" link where you'll find
+;;      a comprehensive list of Doom's modules and what flags they support.
+
+;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
+;;      'C-c c k' for non-vim users) to view its documentation. This works on
+;;      flags as well (those symbols that start with a plus).
+;;
+;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
+;;      directory (for easy access to its source code).
+
+(doom!
+ <<init.el:doom!>>
+ )
+#+end_src
+** <</config.el
+#+HEADER: :tangle (expand-file-name "config.el" (or (getenv "DOOMDIR") (or doom-private-dir "~/.doom.d")))
+#+begin_src elisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+;; Place your private configuration here! Remember, you do not need to run 'doom
+;; sync' after modifying this file!
+
+
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets.
+(setq user-full-name "7696122"
+      user-mail-address "7696122@gmail.com")
+
+;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
+;; are the three important ones:
+;;
+;; + `doom-font'
+;; + `doom-variable-pitch-font'
+;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;;   presentations or streaming.
+;;
+;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+;; font string. You generally only need these two:
+;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+(setq doom-theme 'doom-one)
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type nil)
+
+
+;; Here are some additional functions/macros that could help you configure Doom:
+;;
+;; - `load!' for loading external *.el files relative to this one
+;; - `use-package!' for configuring packages
+;; - `after!' for running code after a package has loaded
+;; - `add-load-path!' for adding directories to the `load-path', relative to
+;;   this file. Emacs searches the `load-path' when you load packages with
+;;   `require' or `use-package'.
+;; - `map!' for binding new keys
+;;
+;; To get information about any of these functions/macros, move the cursor over
+;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
+;; This will open documentation for it, including demos of how they are used.
+;;
+;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
+;; they are implemented.
+
+<<$DOOMDIR/config.el>>
+#+end_src
+
+** <</packages.el
+#+HEADER: :tangle (expand-file-name "packages.el" (or (getenv "DOOMDIR") (or doom-private-dir "~/.doom.d")))
+#+begin_src elisp
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+
+;; To install a package with Doom you must declare them here and run 'doom sync'
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
+
+
+;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+;(package! some-package)
+
+;; To install a package directly from a remote git repo, you must specify a
+;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
+;; https://github.com/raxod502/straight.el#the-recipe-format
+;(package! another-package
+;  :recipe (:host github :repo "username/repo"))
+
+;; If the package you are trying to install does not contain a PACKAGENAME.el
+;; file, or is located in a subdirectory of the repo, you'll need to specify
+;; `:files' in the `:recipe':
+;(package! this-package
+;  :recipe (:host github :repo "username/repo"
+;           :files ("some-file.el" "src/lisp/*.el")))
+
+;; If you'd like to disable a package included with Doom, you can do so here
+;; with the `:disable' property:
+;(package! builtin-package :disable t)
+
+;; You can override the recipe of a built in package without having to specify
+;; all the properties for `:recipe'. These will inherit the rest of its recipe
+;; from Doom or MELPA/ELPA/Emacsmirror:
+;(package! builtin-package :recipe (:nonrecursive t))
+;(package! builtin-package-2 :recipe (:repo "myfork/package"))
+
+;; Specify a `:branch' to install a package from a particular branch or tag.
+;; This is required for some packages whose default branch isn't 'master' (which
+;; our package manager can't deal with; see raxod502/straight.el#279)
+;(package! builtin-package :recipe (:branch "develop"))
+
+;; Use `:pin' to specify a particular commit to install.
+;(package! builtin-package :pin "1a2b3c4d5e")
+
+
+;; Doom's packages are pinned to a specific commit and updated from release to
+;; release. The `unpin!' macro allows you to unpin single packages...
+;(unpin! pinned-package)
+;; ...or multiple packages
+;(unpin! pinned-package another-pinned-package)
+;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
+;(unpin! t)
+
+#+end_src
+
+* Fix Keys
+#+HEADER: :noweb-ref $DOOMDIR/config.el
+#+begin_src elisp
+(define-key key-translation-map (kbd "C-h") (kbd "DEL")) ;; [?\C-h] [?\C-?]
+
+(when (not window-system)
+  ;; Fixup missing console keys
+  (define-key key-translation-map (kbd "M-[ ,") (kbd "C-,"))
+  (define-key key-translation-map (kbd "M-[ ;") (kbd "C-;"))
+  (define-key key-translation-map (kbd "M-[ TAB") (kbd "C-<tab>"))
+  (define-key key-translation-map (kbd "M-[ e") (kbd "C-<end>"))
+  (define-key key-translation-map (kbd "M-[ h") (kbd "C-<home>")))
+#+end_src
+
+* <doom!
+:PROPERTIES:
+:header-args: :noweb-ref init.el:doom! :noweb yes
+:END:
+
+** COMMENT :input
+#+begin_src elisp
+:input
+#+end_src
+
+*** COMMENT chinese
+#+begin_src elisp
+chinese
+#+end_src
+
+*** COMMENT japanese
+#+begin_src elisp
+japanese
+#+end_src
+
+*** COMMENT layout
+#+begin_src elisp
+layout            ; auie,ctsrnm is the superior home row
+#+end_src
+
+** :completion
+#+begin_src elisp
+:completion
+#+end_src
+
+*** company
+#+begin_src elisp
+company           ; the ultimate code completion backend
+#+end_src
+
+*** COMMENT helm
+#+begin_src elisp
+helm              ; the *other* search engine for love and life
+#+end_src
+
+*** COMMENT ido
+#+begin_src elisp
+ido               ; the other *other* search engine...
+#+end_src
+
+*** ivy
+#+begin_src elisp
+ivy               ; a search engine for love and life
+#+end_src
+
+** :ui
+#+begin_src elisp
+:ui
+#+end_src
+
+*** deft
+#+begin_src elisp
+deft              ; notational velocity for Emacs
+#+end_src
+
+*** doom
+#+begin_src elisp
+doom              ; what makes DOOM look the way it does
+#+end_src
+
+*** doom-dashboard
+#+begin_src elisp
+doom-dashboard    ; a nifty splash screen for Emacs
+#+end_src
+
+*** doom-quit
+#+begin_src elisp
+doom-quit         ; DOOM quit-message prompts when you quit Emacs
+#+end_src
+
+*** COMMENT emoji
+#+begin_src elisp
+(emoji +unicode)  ; 🙂
+#+end_src
+
+*** COMMENT fill-column
+#+begin_src elisp
+fill-column       ; a `fill-column' indicator
+#+end_src
+
+*** hl-todo
+#+begin_src elisp
+hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+#+end_src
+
+*** COMMENT hydra
+#+begin_src elisp
+hydra
+#+end_src
+
+*** COMMENT indent-guides
+#+begin_src elisp
+indent-guides     ; highlighted indent columns
+#+end_src
+
+*** COMMENT ligatures
+#+begin_src elisp
+ligatures         ; ligatures and symbols to make your code pretty again
+#+end_src
+
+*** COMMENT minimap
+#+begin_src elisp
+minimap           ; show a map of the code on the side
+#+end_src
+
+*** modeline
+#+begin_src elisp
+modeline          ; snazzy, Atom-inspired modeline, plus API
+#+end_src
+
+*** nav-flash
+#+begin_src elisp
+nav-flash         ; blink cursor line after big motions
+#+end_src
+
+*** COMMENT neotree
+#+begin_src elisp
+neotree           ; a project drawer, like NERDTree for vim
+#+end_src
+
+*** ophints
+#+begin_src elisp
+ophints           ; highlight the region an operation acts on
+#+end_src
+
+*** popup
+#+begin_src elisp
+(popup +defaults)   ; tame sudden yet inevitable temporary windows
+#+end_src
+
+*** COMMENT tabs
+#+begin_src elisp
+tabs              ; a tab bar for Emacs
+#+end_src
+
+*** treemacs
+#+begin_src elisp
+treemacs          ; a project drawer, like neotree but cooler
+#+end_src
+
+*** unicode
+#+begin_src elisp
+unicode           ; extended unicode support for various languages
+#+end_src
+
+*** vc-gutter
+#+begin_src elisp
+vc-gutter         ; vcs diff in the fringe
+#+end_src
+
+*** vi-tilde-fringe
+#+begin_src elisp
+vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+#+end_src
+
+*** COMMENT window-select
+#+begin_src elisp
+window-select     ; visually switch windows
+#+end_src
+
+*** workspaces
+#+begin_src elisp
+workspaces        ; tab emulation, persistence & separate workspaces
+#+end_src
+
+*** COMMENT zen
+#+begin_src elisp
+zen               ; distraction-free coding or writing
+#+end_src
+
+** :editor
+#+begin_src elisp
+:editor
+#+end_src
+
+*** evil
+#+begin_src elisp
+(evil +everywhere); come to the dark side, we have cookies
+#+end_src
+
+*** file-templates
+#+begin_src elisp
+file-templates    ; auto-snippets for empty files
+#+end_src
+
+*** fold
+#+begin_src elisp
+fold              ; (nigh) universal code folding
+#+end_src
+
+*** COMMENT format
+#+begin_src elisp
+(format +onsave)  ; automated prettiness
+#+end_src
+
+*** COMMENT god
+#+begin_src elisp
+god               ; run Emacs commands without modifier keys
+#+end_src
+
+*** COMMENT lispy
+#+begin_src elisp
+lispy             ; vim for lisp, for people who don't like vim
+#+end_src
+
+*** COMMENT multiple-cursors
+#+begin_src elisp
+multiple-cursors  ; editing in many places at once
+#+end_src
+
+*** COMMENT objed
+#+begin_src elisp
+objed             ; text object editing for the innocent
+#+end_src
+
+*** COMMENT parinfer
+#+begin_src elisp
+parinfer          ; turn lisp into python, sort of
+#+end_src
+
+*** COMMENT rotate-text
+#+begin_src elisp
+rotate-text       ; cycle region at point between text candidates
+#+end_src
+
+*** snippets
+#+begin_src elisp
+snippets          ; my elves. They type so I don't have to
+#+end_src
+
+*** COMMENT word-wrap
+#+begin_src elisp
+word-wrap         ; soft wrapping with language-aware indent
+#+end_src
+
+** :emacs
+#+begin_src elisp
+:emacs
+#+end_src
+
+*** dired
+#+begin_src elisp
+dired             ; making dired pretty [functional]
+#+end_src
+
+*** electric
+#+begin_src elisp
+electric          ; smarter, keyword-based electric-indent
+#+end_src
+
+*** COMMENT ibuffer
+#+begin_src elisp
+ibuffer         ; interactive buffer management
+#+end_src
+
+*** undo
+#+begin_src elisp
+undo              ; persistent, smarter undo for your inevitable mistakes
+#+end_src
+
+*** vc
+#+begin_src elisp
+vc                ; version-control and Emacs, sitting in a tree
+#+end_src
+
+** COMMENT :term
+#+begin_src elisp
+:term
+#+end_src
+
+*** COMMENT eshell
+#+begin_src elisp
+eshell            ; the elisp shell that works everywhere
+#+end_src
+
+*** COMMENT shell
+#+begin_src elisp
+shell             ; simple shell REPL for Emacs
+#+end_src
+
+*** COMMENT term
+#+begin_src elisp
+term              ; basic terminal emulator for Emacs
+#+end_src
+
+*** COMMENT vterm
+#+begin_src elisp
+vterm             ; the best terminal emulation in Emacs
+#+end_src
+
+** :checkers
+#+begin_src elisp
+:checkers
+#+end_src
+
+*** syntax
+#+begin_src elisp
+syntax              ; tasing you for every semicolon you forget
+#+end_src
+
+*** COMMENT spell
+#+begin_src elisp
+spell             ; tasing you for misspelling mispelling
+#+end_src
+
+*** COMMENT grammar
+#+begin_src elisp
+grammar           ; tasing grammar mistake every you make
+#+end_src
+
+** :tools
+#+begin_src elisp
+:tools
+#+end_src
+
+*** COMMENT ansible
+#+begin_src elisp
+ansible
+#+end_src
+
+*** COMMENT debugger
+#+begin_src elisp
+debugger          ; FIXME stepping through code, to help you add bugs
+#+end_src
+
+*** COMMENT direnv
+#+begin_src elisp
+direnv
+#+end_src
+
+*** COMMENT docker
+#+begin_src elisp
+docker
+#+end_src
+
+*** COMMENT editorconfig
+#+begin_src elisp
+editorconfig      ; let someone else argue about tabs vs spaces
+#+end_src
+
+*** COMMENT ein
+#+begin_src elisp
+ein               ; tame Jupyter notebooks with emacs
+#+end_src
+
+*** eval
+#+begin_src elisp
+(eval +overlay)     ; run code, run (also, repls)
+#+end_src
+
+*** COMMENT gist
+#+begin_src elisp
+gist              ; interacting with github gists
+#+end_src
+
+*** lookup
+#+begin_src elisp
+lookup              ; navigate your code and its documentation
+#+end_src
+
+*** COMMENT lsp
+#+begin_src elisp
+lsp
+#+end_src
+
+*** magit
+#+begin_src elisp
+magit             ; a git porcelain for Emacs
+#+end_src
+
+*** COMMENT make
+#+begin_src elisp
+make              ; run make tasks from Emacs
+#+end_src
+
+*** COMMENT pass
+#+begin_src elisp
+pass              ; password manager for nerds
+#+end_src
+
+*** COMMENT pdf
+#+begin_src elisp
+pdf               ; pdf enhancements
+#+end_src
+
+*** COMMENT prodigy
+#+begin_src elisp
+prodigy           ; FIXME managing external services & code builders
+#+end_src
+
+*** COMMENT rgb
+#+begin_src elisp
+rgb               ; creating color strings
+#+end_src
+
+*** COMMENT taskrunner
+#+begin_src elisp
+taskrunner        ; taskrunner for all your projects
+#+end_src
+
+*** COMMENT terraform
+#+begin_src elisp
+terraform         ; infrastructure as code
+#+end_src
+
+*** COMMENT tmux
+#+begin_src elisp
+tmux              ; an API for interacting with tmux
+#+end_src
+
+*** COMMENT upload
+#+begin_src elisp
+upload            ; map local to remote projects via ssh/ftp
+#+end_src
+
+** :os
+#+begin_src elisp
+:os
+#+end_src
+
+*** macosos
+#+begin_src elisp
+(:if IS-MAC macos)  ; improve compatibility with macOS
+#+end_src
+
+*** COMMENT tty
+#+begin_src elisp
+tty               ; improve the terminal Emacs experience
+#+end_src
+
+** :lang
+#+begin_src elisp
+:lang
+#+end_src
+
+*** COMMENT agda
+#+begin_src elisp
+agda              ; types of types of types of types...
+#+end_src
+
+*** COMMENT cc
+#+begin_src elisp
+cc                ; C/C++/Obj-C madness
+#+end_src
+
+*** COMMENT clojure
+#+begin_src elisp
+clojure           ; java with a lisp
+#+end_src
+
+*** COMMENT common-lisp
+#+begin_src elisp
+common-lisp       ; if you've seen one lisp, you've seen them all
+#+end_src
+
+*** COMMENT coq
+#+begin_src elisp
+coq               ; proofs-as-programs
+#+end_src
+
+*** COMMENT crystal
+#+begin_src elisp
+crystal           ; ruby at the speed of c
+#+end_src
+
+*** COMMENT csharp
+#+begin_src elisp
+csharp            ; unity, .NET, and mono shenanigans
+#+end_src
+
+*** COMMENT data
+#+begin_src elisp
+data              ; config/data formats
+#+end_src
+
+*** COMMENT dart
+#+begin_src elisp
+(dart +flutter)   ; paint ui and not much else
+#+end_src
+
+*** COMMENT elixir
+#+begin_src elisp
+elixir            ; erlang done right
+#+end_src
+
+*** COMMENT elm
+#+begin_src elisp
+elm               ; care for a cup of TEA?
+#+end_src
+
+*** emacs-lisp
+#+begin_src elisp
+emacs-lisp        ; drown in parentheses
+#+end_src
+
+*** COMMENT erlang
+#+begin_src elisp
+erlang            ; an elegant language for a more civilized age
+#+end_src
+
+*** COMMENT ess
+#+begin_src elisp
+ess               ; emacs speaks statistics
+#+end_src
+
+*** COMMENT faust
+#+begin_src elisp
+faust             ; dsp, but you get to keep your soul
+#+end_src
+
+*** COMMENT fsharp
+#+begin_src elisp
+fsharp            ; ML stands for Microsoft's Language
+#+end_src
+
+*** COMMENT fstar
+#+begin_src elisp
+fstar             ; (dependent) types and (monadic) effects and Z3
+#+end_src
+
+*** COMMENT gdscript
+#+begin_src elisp
+gdscript          ; the language you waited for
+#+end_src
+
+*** go
+#+begin_src elisp
+;;(go +lsp)         ; the hipster dialect
+#+end_src
+
+*** COMMENT haskell
+#+begin_src elisp
+(haskell +dante)  ; a language that's lazier than I am
+#+end_src
+
+*** COMMENT hy
+#+begin_src elisp
+hy                ; readability of scheme w/ speed of python
+#+end_src
+
+*** COMMENT idris
+#+begin_src elisp
+idris             ; a language you can depend on
+#+end_src
+
+*** COMMENT json
+#+begin_src elisp
+json              ; At least it ain't XML
+#+end_src
+
+*** COMMENT java
+#+begin_src elisp
+(java +meghanada) ; the poster child for carpal tunnel syndrome
+#+end_src
+
+*** javascript
+#+begin_src elisp
+javascript        ; all(hope(abandon(ye(who(enter(here))))))
+#+end_src
+
+*** COMMENT julia
+#+begin_src elisp
+julia             ; a better, faster MATLAB
+#+end_src
+
+*** COMMENT kotlin
+#+begin_src elisp
+kotlin            ; a better, slicker Java(Script)
+#+end_src
+
+*** COMMENT latex
+#+begin_src elisp
+latex             ; writing papers in Emacs has never been so fun
+#+end_src
+
+*** COMMENT lean
+#+begin_src elisp
+lean
+#+end_src
+
+*** COMMENT factor
+#+begin_src elisp
+factor
+#+end_src
+
+*** COMMENT ledger
+#+begin_src elisp
+ledger            ; an accounting system in Emacs
+#+end_src
+
+*** COMMENT lua
+#+begin_src elisp
+lua               ; one-based indices? one-based indices
+#+end_src
+
+*** COMMENT markdown
+#+begin_src elisp
+markdown          ; writing docs for people to ignore
+#+end_src
+
+*** COMMENT nim
+#+begin_src elisp
+nim               ; python + lisp at the speed of c
+#+end_src
+
+*** nix
+#+begin_src elisp
+nix               ; I hereby declare "nix geht mehr!"
+#+end_src
+
+*** COMMENT ocaml
+#+begin_src elisp
+ocaml             ; an objective camel
+#+end_src
+
+*** org
+#+begin_src elisp
+org               ; organize your plain life in plain text
+#+end_src
+
+*** COMMENT php
+#+begin_src elisp
+php               ; perl's insecure younger brother
+#+end_src
+
+*** COMMENT plantuml
+#+begin_src elisp
+plantuml          ; diagrams for confusing people more
+#+end_src
+
+*** COMMENT purescript
+#+begin_src elisp
+purescript        ; javascript, but functional
+#+end_src
+
+*** COMMENT python
+#+begin_src elisp
+python            ; beautiful is better than ugly
+#+end_src
+
+*** COMMENT qt
+#+begin_src elisp
+qt                ; the 'cutest' gui framework ever
+#+end_src
+
+*** COMMENT racket
+#+begin_src elisp
+racket            ; a DSL for DSLs
+#+end_src
+
+*** COMMENT raku
+#+begin_src elisp
+raku              ; the artist formerly known as perl6
+#+end_src
+
+*** COMMENT rest
+#+begin_src elisp
+rest              ; Emacs as a REST client
+#+end_src
+
+*** COMMENT rst
+#+begin_src elisp
+rst               ; ReST in peace
+#+end_src
+
+*** COMMENT ruby
+#+begin_src elisp
+(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+#+end_src
+
+*** COMMENT rust
+#+begin_src elisp
+rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+#+end_src
+
+*** COMMENT scala
+#+begin_src elisp
+scala             ; java, but good
+#+end_src
+
+*** scheme
+#+begin_src elisp
+scheme            ; a fully conniving family of lisps
+#+end_src
+
+*** sh
+#+begin_src elisp
+sh                ; she sells {ba,z,fi}sh shells on the C xor
+#+end_src
+
+*** sml
+#+begin_src elisp
+sml
+#+end_src
+
+*** COMMENT solidity
+#+begin_src elisp
+solidity          ; do you need a blockchain? No.
+#+end_src
+
+*** COMMENT swift
+#+begin_src elisp
+swift             ; who asked for emoji variables?
+#+end_src
+
+*** COMMENT terra
+#+begin_src elisp
+terra             ; Earth and Moon in alignment for performance.
+#+end_src
+
+*** COMMENT web
+#+begin_src elisp
+web               ; the tubes
+#+end_src
+
+*** COMMENT yaml
+#+begin_src elisp
+yaml              ; JSON, but readable
+#+end_src
+
+** COMMENT :email
+#+begin_src elisp
+:email
+#+end_src
+
+*** COMMENT mu4e
+#+begin_src elisp
+(mu4e +gmail)
+#+end_src
+
+*** COMMENT notmuch
+#+begin_src elisp
+notmuch
+#+end_src
+
+*** COMMENT wanderlust
+#+begin_src elisp
+(wanderlust +gmail)
+#+end_src
+
+** :app
+#+begin_src elisp
+:app
+#+end_src
+
+*** calendar
+#+begin_src elisp
+calendar
+#+end_src
+
+*** COMMENT irc
+#+begin_src elisp
+irc               ; how neckbeards socialize
+#+end_src
+
+*** COMMENT rss
+#+begin_src elisp
+(rss +org)        ; emacs as an RSS reader
+;;twitter           ; twitter client https://twitter.com/vnought
+#+end_src
+
+*** COMMENT twitter
+#+begin_src elisp
+twitter           ; twitter client https://twitter.com/vnought
+#+end_src
+
+** :config
+#+begin_src elisp
+:config
+#+end_src
+
+*** COMMENT literate
+#+begin_src elisp
+literate
+#+end_src
+
+*** default
+#+begin_src elisp
+(default
+  <<config/default>>
+  )
+#+end_src
+
+**** +bindings
+#+HEADER: :noweb-ref config/default
+#+begin_src elisp
++bindings
+#+end_src
+
+**** +bindings
+#+HEADER: :noweb-ref config/default
+#+begin_src elisp
++smartparens
+#+end_src
